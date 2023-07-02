@@ -1,0 +1,534 @@
+<html>
+<head>
+        <title>Replicador</title>
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
+<script>
+//--------------------CASAMENTO
+//Variaveis banco de dados principal
+var mHashbdpcasa;
+var Bensbdpcasa;
+var anoCasabdpcasa;
+var cidadeCasabdpcasa;
+var dataCasaexbdpcasa;
+var diaCasabdpcasa;
+var estadoCasabdpcasa;
+var mesCasabdpcasa;
+var nomeConj1bdpcasa;
+var nomeConj2bdpcasa;
+var nomePresibdpcasa;
+var obsCasabdpcasa;
+//Camada 1
+var mHashC1casa;
+var BensC1casa;
+var anoCasaC1casa;
+var cidadeCasaC1casa;
+var dataCasaexC1casa;
+var diaCasaC1casa;
+var estadoCasaC1casa;
+var mesCasaC1casa;
+var nomeConj1C1casa;
+var nomeConj2C1casa;
+var nomePresiC1casa;
+var obsCasaC1casa;
+//Camada 2
+var mHashC2casa;
+var BensC2casa;
+var anoCasaC2casa;
+var cidadeCasaC2casa;
+var dataCasaexC2casa;
+var diaCasaC2casa;
+var estadoCasaC2casa;
+var mesCasaC2casa;
+var nomeConj1C2casa;
+var nomeConj2C2casa;
+var nomePresiC2casa;
+var obsCasaC2casa;
+//--------------------NASCIMENTO 
+//Variaveis banco de dados principal
+var mHashbdpnasc;
+var cboRacabdpnasc;
+var anoNascbdpnasc;
+var cidadeNascbdpnasc;
+var dataNascexbdpnasc;
+var diaNascbdpnasc;
+var estadoNascbdpnasc;
+var mesNascbdpnasc;
+var nomePaibdpnasc;
+var nomeCriancabdpnasc;
+var nomeMaebdpnasc;
+var obsNascbdpnasc;
+var horarioNascbdpnasc;
+var cboSexobdpnasc;
+var hospitalNascbdpnasc;
+//Camada 1
+var mHashC1nasc;
+var cboRacaC1nasc;
+var anoNascC1nasc;
+var cidadeNascC1nasc;
+var dataNascexC1nasc;
+var diaNascC1nasc;
+var estadoNascC1nasc;
+var mesNascC1nasc;
+var nomePaiC1nasc;
+var nomeCriancaC1nasc;
+var nomeMaeC1nasc;
+var obsNascC1nasc;
+var horarioNascC1nasc;
+var cboSexoC1nasc;
+var hospitalNascC1nasc;  
+//Camada 2
+var mHashC2nascnasc;
+var cboRacaC2nasc;
+var anoNascC2nasc;
+var cidadeNascC2nasc;
+var dataNascexC2nasc;
+var diaNascC2nasc;
+var estadoNascC2nasc;
+var mesNascC2nasc;
+var nomePaiC2nasc;
+var nomeCriancaC2nasc;
+var nomeMaeC2nasc;
+var obsNascC2nasc;
+var horarioNascC2nasc;
+var cboSexoC2nasc;
+var hospitalNascC2nasc;
+///--------------------OBITO
+//Variaveis banco de dados principal
+var mHashbdpObito;
+var ComplementobdpObito;
+var anoFalebdpObito;
+var cidadeFinabdpObito;
+var dataFaleexbdpObito;
+var diaFalebdpObito;
+var estadoFinabdpObito;
+var mesFalebdpObito;
+var nomeFinabdpObito;
+var naturalidadeFinabdpObito;
+var rgFinabdpObito;
+var obsFalebdpObito;
+var FiliacaobdpObito;
+var bairroFinabdpObito;
+var causaMortebdpObito;
+var cboestCivilbdpObito;
+var cboracaFinabdpObito;
+var horarioFalebdpObito;
+var nomeConjbdpObito;
+var numeFinabdpObito;
+var proFinabdpObito;
+var ruaFinabdpObito;
+//Camada 1
+var mHashC1Obito;
+var ComplementoC1Obito;
+var anoFaleC1Obito;
+var cidadeFinaC1Obito;
+var dataFaleexC1Obito;
+var diaFaleC1Obito;
+var estadoFinaC1Obito;
+var mesFaleC1Obito;
+var nomeFinaC1Obito;
+var naturalidadeFinaC1Obito;
+var rgFinaC1Obito;
+var obsFaleC1Obito;
+var FiliacaoC1Obito;
+var bairroFinaC1Obito;
+var causaMorteC1Obito;
+var cboestCivilC1Obito;
+var cboracaFinaC1Obito;
+var horarioFaleC1Obito;
+var nomeConjC1Obito;
+var numeFinaC1Obito;
+var proFinaC1Obito;
+var ruaFinaC1Obito;
+//Camada 2
+var mHashC2Obito;
+var ComplementoC2Obito;
+var anoFaleC2Obito;
+var cidadeFinaC2Obito;
+var dataFaleexC2Obito;
+var diaFaleC2Obito;
+var estadoFinaC2Obito;
+var mesFaleC2Obito;
+var nomeFinaC2Obito;
+var naturalidadeFinaC2Obito;
+var rgFinaC2Obito;
+var obsFaleC2Obito;
+var FiliacaoC2Obito;
+var bairroFinaC2Obito;
+var causaMorteC2Obito;
+var cboestCivilC2Obito;
+var cboracaFinaC2Obito;
+var horarioFaleC2Obito;
+var nomeConjC2Obito;
+var numeFinaC2Obito;
+var proFinaC2Obito;
+var ruaFinaC2Obito;
+//referencias
+//Inicializando o 1 banco de dados
+var bdpcasaApp = firebase.initializeApp({
+    apiKey: "AIzaSyCNC6FMVflEqKQ-9OOEnFE5W41umsmOTa8",
+    authDomain: "tcc-cartorio.firebaseapp.com",
+    databaseURL: "https://tcc-cartorio.firebaseio.com",
+    projectId: "tcc-cartorio",
+    storageBucket: "tcc-cartorio.appspot.com",
+    messagingSenderId: "302771964490",
+    appId: "1:302771964490:web:736b80ff06b4071b8f34b3",
+    measurementId: "G-VCRT1MPG6C"
+});
+//pegando as referencias
+var refbdpcasa = bdpcasaApp.database().ref("CertidaoCasa");
+var refbdpnasc = bdpcasaApp.database().ref("CertidaoNasc");
+var refbdpObito = bdpcasaApp.database().ref("CertidaoObito");
+//Inicializando o 2 banco de dados
+var C1casaApp = firebase.initializeApp({
+    apiKey: "AIzaSyBDHE_U4gNUAAeXXwMnwE-pj3cG6L94tms",
+    authDomain: "camada-1.firebaseapp.com",
+    databaseURL: "https://camada-1.firebaseio.com",
+    projectId: "camada-1",
+    storageBucket: "camada-1.appspot.com",
+    messagingSenderId: "534025191479",
+    appId: "1:534025191479:web:31d7f61fe4bbc4fd1a7fb2",
+    measurementId: "G-YR398W0JVC"
+},'Camada-1');
+//pegando as referencias
+var refC1casa = C1casaApp.database().ref("CertidaoCasa");
+var refC1nasc = C1casaApp.database().ref("CertidaoNasc");
+var refC1Obito = C1casaApp.database().ref("CertidaoObito");
+//Inicializando o 3 banco de dados
+var C2casaApp = firebase.initializeApp({
+    apiKey: "AIzaSyCjtFvYDqZKS--3OGonVNAW0PRNEvnZkkA",
+    authDomain: "camada-8559d.firebaseapp.com",
+    databaseURL: "https://camada-8559d.firebaseio.com",
+    projectId: "camada-8559d",
+    storageBucket: "camada-8559d.appspot.com",
+    messagingSenderId: "842222040632",
+    appId: "1:842222040632:web:18fa907b6dbc93223658cd",
+    measurementId: "G-7F24BNP5T5"
+},'Camada-2');
+//pegando as referencias
+var refC2casa = C2casaApp.database().ref("CertidaoCasa");
+var refC2nasc = C2casaApp.database().ref("CertidaoNasc");
+var refC2Obito = C2casaApp.database().ref("CertidaoObito");
+//casamento
+//pegando informação do banco de dados principal
+    refbdpcasa.on("child_added", snap=>{
+        mHashbdpcasa = snap.key;
+        Bensbdpcasa = snap.child("Bens").val();
+        anoCasabdpcasa = snap.child("anoCasa").val();
+        cidadeCasabdpcasa = snap.child("cidadeCasa").val();
+        dataCasaexbdpcasa = snap.child("dataCasaex").val(); 
+        diaCasabdpcasa = snap.child("diaCasa").val();
+        estadoCasabdpcasa = snap.child("estadoCasa").val();
+        mesCasabdpcasa = snap.child("mesCasa").val();
+        nomeConj1bdpcasa = snap.child("nomeConj1").val();
+        nomeConj2bdpcasa = snap.child("nomeConj2").val();
+        nomePresibdpcasa = snap.child("nomePresi").val();
+        obsCasabdpcasa = snap.child("obsCasa").val();
+//Inserido do banco principal  para Camada1 casamento
+//converte a hash anterior em base 64 para gerar uma nova hash
+        mHashC1casa = btoa(mHashbdpcasa);
+    var resultadoC1casa = refC1casa.child(mHashC1casa).set({
+            previousHash: mHashbdpcasa,
+            Bens:Bensbdpcasa,
+            anoCasa:anoCasabdpcasa,
+            cidadeCasa:cidadeCasabdpcasa,
+            dataCasaex:dataCasaexbdpcasa,
+            diaCasa:diaCasabdpcasa,
+            estadoCasa:estadoCasabdpcasa,
+            mesCasa:mesCasabdpcasa,
+            nomeConj1:nomeConj1bdpcasa,
+            nomeConj2:nomeConj2bdpcasa,
+            nomePresi:nomePresibdpcasa,
+            obsCasa:obsCasabdpcasa
+    });
+        console.log("replicado casamento");
+});
+//Pegando dados da camada 1
+    refC1casa.on("child_added", snap=>{ 
+        mHashC1casa = snap.key;
+        previousHashC1casa = snap.child("previousHash").val();
+        BensC1casa = snap.child("Bens").val();
+        anoCasaC1casa = snap.child("anoCasa").val();
+        cidadeCasaC1casa = snap.child("cidadeCasa").val();
+        dataCasaexC1casa = snap.child("dataCasaex").val();
+        diaCasaC1casa = snap.child("diaCasa").val();
+        estadoCasaC1casa = snap.child("estadoCasa").val();
+        mesCasaC1casa = snap.child("mesCasa").val();
+        nomeConj1C1casa = snap.child("nomeConj1").val();
+        nomeConj2C1casa = snap.child("nomeConj2").val();
+        nomePresiC1casa = snap.child("nomePresi").val();
+        obsCasaC1casa = snap.child("obsCasa").val();
+        mHashC2casa = btoa(mHashC1casa);
+//Inserindo na camada 2
+    refC2casa.child(mHashC2casa).set({
+            previousHash: mHashC1casa,
+            Bens:BensC1casa,
+            anoCasa:anoCasaC1casa,
+            cidadeCasa:cidadeCasaC1casa,
+            dataCasaex:dataCasaexC1casa,
+            diaCasa:diaCasaC1casa,
+            estadoCasa:estadoCasaC1casa,
+            mesCasa:mesCasaC1casa,
+            nomeConj1:nomeConj1C1casa,
+            nomeConj2:nomeConj2C1casa,
+            nomePresi:nomePresiC1casa,
+            obsCasa:obsCasaC1casa
+    });
+});
+//Pegando dados da camada 2
+    refC2casa.on("child_added", snap=>{ 
+        mHashC2casa = snap.key;
+        previousHashC2casa = snap.child("previousHash").val();
+        BensC2casa = snap.child("Bens").val();
+        anoCasaC2casa = snap.child("anoCasa").val();
+        cidadeCasaC2casa = snap.child("cidadeCasa").val();
+        dataCasaexC2casa = snap.child("dataCasaex").val();
+        diaCasaC2casa = snap.child("diaCasa").val();
+        estadoCasaC2casa = snap.child("estadoCasa").val();
+        mesCasaC2casa = snap.child("mesCasa").val();
+        nomeConj1C2casa = snap.child("nomeConj1").val();
+        nomeConj2C2casa = snap.child("nomeConj2").val();
+        nomePresiC2casa = snap.child("nomePresi").val();
+        obsCasaC2casa = snap.child("obsCasa").val();
+});
+//--------------------NASCIMENTO
+    refbdpnasc.on("child_added", snap=>{
+        mHashbdpnasc = snap.key;
+        cboRacabdpnasc = snap.child("cboRaca").val();
+        anoNascbdpnasc = snap.child("anoNasc").val();
+        cidadeNascbdpnasc = snap.child("cidadeNasc").val();
+        dataNascexbdpnasc = snap.child("dataNascex").val();
+        diaNascbdpnasc = snap.child("diaNasc").val();
+        estadoNascbdpnasc = snap.child("estadoNasc").val();
+        mesNascbdpnasc = snap.child("mesNasc").val();
+        nomePaibdpnasc = snap.child("nomePai").val();
+        nomeCriancabdpnasc = snap.child("nomeCrianca").val();
+        nomeMaebdpnasc = snap.child("nomeMae").val();
+        obsNascbdpnasc = snap.child("obsNasc").val();
+        horarioNascbdpnasc = snap.child("horarioNasc").val();
+        cboSexobdpnasc = snap.child("cboSexo").val();
+        hospitalNascbdpnasc = snap.child("hospitalNasc").val();
+//Inserido do banco principal  para Camada1 nascimento
+//converte a hash anterior em base 64 para gerar uma nova hash
+        mHashC1nasc = btoa(mHashbdpnasc);
+    var resultadoC1nasc = refC1nasc.child(mHashC1nasc).set({
+            previousHash: mHashbdpnasc,
+            cboRaca:cboRacabdpnasc,
+            anoNasc:anoNascbdpnasc,
+            cidadeNasc:cidadeNascbdpnasc,
+            dataNascex:dataNascexbdpnasc,
+            diaNasc:diaNascbdpnasc,
+            estadoNasc:estadoNascbdpnasc,
+            mesNasc:mesNascbdpnasc,
+            nomePai:nomePaibdpnasc,
+            nomeCrianca:nomeCriancabdpnasc,
+            nomeMae:nomeMaebdpnasc,
+            obsNasc:obsNascbdpnasc,
+            horarioNasc:horarioNascbdpnasc,
+            cboSexo:cboSexobdpnasc,
+            hospitalNasc:hospitalNascbdpnasc
+    });
+        console.log("replicado nascimento");
+});
+//Pegando dados da camada 1
+    refC1nasc.on("child_added", snap=>{ 
+        mHashC1nasc = snap.key;
+        previousHashC1nasc = snap.child("previousHash").val();
+        cboRacaC1nasc = snap.child("cboRaca").val();
+        anoNascC1nasc = snap.child("anoNasc").val();
+        cidadeNascC1nasc = snap.child("cidadeNasc").val();
+        dataNascexC1nasc = snap.child("dataNascex").val();
+        diaNascC1nasc = snap.child("diaNasc").val();
+        estadoNascC1nasc = snap.child("estadoNasc").val();
+        mesNascC1nasc = snap.child("mesNasc").val();
+        nomePaiC1nasc = snap.child("nomePai").val();
+        nomeCriancaC1nasc = snap.child("nomeCrianca").val();
+        nomeMaeC1nasc = snap.child("nomeMae").val();
+        obsNascC1nasc = snap.child("obsNasc").val();
+        horarioNascC1nasc = snap.child("horarioNasc").val();
+        cboSexoC1nasc = snap.child("cboSexo").val();
+        hospitalNascC1nasc = snap.child("hospitalNasc").val();
+        mHashC2nasc = btoa(mHashC1nasc);
+//Inserindo na camada 2
+    refC2nasc.child(mHashC2nasc).set({
+            previousHash: mHashC1nasc,
+            cboRaca:cboRacaC1nasc,
+            anoNasc:anoNascC1nasc,
+            cidadeNasc:cidadeNascC1nasc,
+            dataNascex:dataNascexC1nasc,
+            diaNasc:diaNascC1nasc,
+            estadoNasc:estadoNascC1nasc,
+            mesNasc:mesNascC1nasc,
+            nomePai:nomePaiC1nasc,
+            nomeCrianca:nomeCriancaC1nasc,
+            nomeMae:nomeMaeC1nasc,
+            obsNasc:obsNascC1nasc,
+            horarioNasc:horarioNascC1nasc,
+            cboSexo:cboSexoC1nasc,
+            hospitalNasc:hospitalNascC1nasc
+    });
+});
+//Pegando dados da camada 2
+    refC2nasc.on("child_added", snap=>{ 
+        mHashC2nasc = snap.key;
+        previousHashC2nasc = snap.child("previousHash").val();
+        cboRacaC2nasc = snap.child("cboRaca").val();
+        anoNascC2nasc = snap.child("anoNasc").val();
+        cidadeNascC2nasc = snap.child("cidadeNasc").val();
+        dataNascexC2nasc = snap.child("dataNascex").val();
+        diaNascC2nasc = snap.child("diaNasc").val();
+        estadoNascC2nasc = snap.child("estadoNasc").val();
+        mesNascC2nasc = snap.child("mesNasc").val();
+        nomePaiC2nasc = snap.child("nomePai").val();
+        nomeCriancaC2nasc = snap.child("nomeCrianca").val();
+        nomeMaeC2nasc = snap.child("nomeMae").val();
+        obsNascC2nasc = snap.child("obsNasc").val();
+        horarioNascC2nasc = snap.child("horarioNasc").val();
+        cboSexoC2nasc = snap.child("cboSexo").val();
+        hospitalNascC2nasc = snap.child("hospitalNasc").val();
+});
+//--------------------OBITO 
+//pegando informação para teste
+    refbdpObito.on("child_added", snap=>{
+        mHashbdpObito = snap.key;
+        ComplementobdpObito = snap.child("Complemento").val();
+        FiliacaobdpObito = snap.child("Filiacao").val();
+        anoFalebdpObito = snap.child("anoFale").val();
+        bairroFinabdpObito = snap.child("bairroFina").val();
+        causaMortebdpObito = snap.child("causaMorte").val();
+        cboestCivilbdpObito = snap.child("cboestCivil").val();
+        cboracaFinabdpObito = snap.child("cboracaFina").val();
+        cbosexoFinabdpObito = snap.child("cbosexoFina").val();
+        cidadeFinabdpObito = snap.child("cidadeFina").val();
+        dataFaleexbdpObito = snap.child("dataFaleex").val();
+        datanascFinaexbdpObito = snap.child("datanascFinaex").val();
+        diaFalebdpObito = snap.child("diaFale").val();
+        estadoFinabdpObito = snap.child("estadoFina").val();
+        horarioFalebdpObito = snap.child("horarioFale").val();
+        mesFalebdpObito = snap.child("mesFale").val();
+        naturalidadeFinabdpObito = snap.child("naturalidadeFina").val();
+        nomeConjbdpObito = snap.child("nomeConj").val();
+        nomeFinabdpObito = snap.child("nomeFina").val();
+        numeFinabdpObito = snap.child("numeFina").val();
+        obsFalebdpObito = snap.child("obsFale").val();
+        proFinabdpObito = snap.child("proFina").val();
+        rgFinabdpObito = snap.child("rgFina").val();
+        ruaFinabdpObito = snap.child("ruaFina").val();
+//Inserido do banco principal  para Camada1 Obito
+//converte a hash anterior em base 64 para gerar uma nova hash
+        mHashC1Obito = btoa(mHashbdpObito);
+    var resultadoC1Obito = refC1Obito.child(mHashC1Obito).set({
+            previousHash: mHashbdpObito,
+            Complemento:ComplementobdpObito,
+            Filiacao:FiliacaobdpObito,
+            anoFale:anoFalebdpObito,
+            bairroFina:bairroFinabdpObito,
+            causaMorte:causaMortebdpObito,
+            cboestCivil:cboestCivilbdpObito,
+            cboracaFina:cboracaFinabdpObito,
+            cbosexoFina:cbosexoFinabdpObito,
+            cidadeFina:cidadeFinabdpObito,
+            dataFaleex:dataFaleexbdpObito,
+            datanascFinaex:datanascFinaexbdpObito,
+            diaFale:diaFalebdpObito,
+            estadoFina:estadoFinabdpObito,
+            horarioFale:horarioFalebdpObito,
+            mesFale:mesFalebdpObito,
+            naturalidadeFina:naturalidadeFinabdpObito,
+            nomeConj:nomeConjbdpObito,
+            nomeFina:nomeFinabdpObito,
+            numeFina:numeFinabdpObito,
+            obsFale:obsFalebdpObito,
+            proFina:proFinabdpObito,
+            rgFina:rgFinabdpObito,
+            ruaFina:ruaFinabdpObito
+    });
+        
+});
+//Pegando dados da camada 1
+    refC1Obito.on("child_added", snap=>{ 
+        mHashC1Obito = snap.key;
+        previousHashC1Obito = snap.child("previousHash").val();
+        ComplementoC1Obito = snap.child("Complemento").val();
+        FiliacaoC1Obito = snap.child("Filiacao").val();
+        anoFaleC1Obito = snap.child("anoFale").val();
+        bairroFinaC1Obito = snap.child("bairroFina").val();
+        causaMorteC1Obito = snap.child("causaMorte").val();
+        cboestCivilC1Obito = snap.child("cboestCivil").val();
+        cboracaFinaC1Obito = snap.child("cboracaFina").val();
+        cbosexoFinaC1Obito = snap.child("cbosexoFina").val();
+        cidadeFinaC1Obito = snap.child("cidadeFina").val();
+        dataFaleexC1Obito = snap.child("dataFaleex").val();
+        datanascFinaexC1Obito = snap.child("datanascFinaex").val();
+        diaFaleC1Obito = snap.child("diaFale").val();
+        estadoFinaC1Obito = snap.child("estadoFina").val();
+        horarioFaleC1Obito = snap.child("horarioFale").val();
+        mesFaleC1Obito = snap.child("mesFale").val();
+        naturalidadeFinaC1Obito = snap.child("naturalidadeFina").val();
+        nomeConjC1Obito = snap.child("nomeConj").val();
+        nomeFinaC1Obito = snap.child("nomeFina").val();
+        numeFinaC1Obito = snap.child("numeFina").val();
+        obsFaleC1Obito = snap.child("obsFale").val();
+        proFinaC1Obito = snap.child("proFina").val();
+        rgFinaC1Obito = snap.child("rgFina").val();
+        ruaFinaC1Obito = snap.child("ruaFina").val();
+        mHashC2Obito = btoa(mHashC1Obito);
+//Inserindo na camada 2
+    refC2Obito.child(mHashC2Obito).set({
+            previousHashC1Obito: mHashC1Obito,
+            Complemento:ComplementoC1Obito,
+            Filiacao:FiliacaoC1Obito,
+            anoFale:anoFaleC1Obito,
+            bairroFina:bairroFinaC1Obito,
+            causaMorte:causaMorteC1Obito,
+            cboestCivil:cboestCivilC1Obito,
+            cboracaFina:cboracaFinaC1Obito,
+            cbosexoFina:cbosexoFinaC1Obito,
+            cidadeFina:cidadeFinaC1Obito,
+            dataFaleex:dataFaleexC1Obito,
+            datanascFinaex:datanascFinaexC1Obito,
+            diaFale:diaFaleC1Obito,
+            estadoFina:estadoFinaC1Obito,
+            horarioFale:horarioFaleC1Obito,
+            mesFale:mesFaleC1Obito,
+            naturalidadeFina:naturalidadeFinaC1Obito,
+            nomeConj:nomeConjC1Obito,
+            nomeFina:nomeFinaC1Obito,
+            numeFina:numeFinaC1Obito,
+            obsFale:obsFaleC1Obito,
+            proFina:proFinaC1Obito,
+            rgFina:rgFinaC1Obito,
+            ruaFina:ruaFinaC1Obito
+    });
+});
+//Pegando dados da camada 2
+    refC2Obito.on("child_added", snap=>{ 
+        ComplementoC2Obito = snap.child("Complemento").val();
+        FiliacaoC2Obito = snap.child("Filiacao").val();
+        anoFaleC2Obito = snap.child("anoFale").val();
+        bairroFinaC2Obito = snap.child("bairroFina").val();
+        causaMorteC2Obito = snap.child("causaMorte").val();
+        cboestCivilC2Obito = snap.child("cboestCivil").val();
+        cboracaFinaC2Obito = snap.child("cboracaFina").val();
+        cbosexoFinaC2Obito = snap.child("cbosexoFina").val();
+        cidadeFinaC2Obito = snap.child("cidadeFina").val();
+        dataFaleexC2Obito = snap.child("dataFaleex").val();
+        datanascFinaexC2Obito = snap.child("datanascFinaex").val();
+        diaFaleC2Obito = snap.child("diaFale").val();
+        estadoFinaC2Obito = snap.child("estadoFina").val();
+        horarioFaleC2Obito = snap.child("horarioFale").val();
+        mesFaleC2Obito = snap.child("mesFale").val();
+        naturalidadeFinaC2Obito = snap.child("naturalidadeFina").val();
+        nomeConjC2Obito = snap.child("nomeConj").val();
+        nomeFinaC2Obito = snap.child("nomeFina").val();
+        numeFinaC2Obito = snap.child("numeFina").val();
+        obsFaleC2Obito = snap.child("obsFale").val();
+        proFinaC2Obito = snap.child("proFina").val();
+        rgFinaC2Obito = snap.child("rgFina").val();
+        ruaFinaC2Obito = snap.child("ruaFina").val();
+});
+</script>
+</body>
+</html>
